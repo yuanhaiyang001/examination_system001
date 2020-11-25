@@ -12,9 +12,9 @@
   <body>
   <center>
 <form action="<%=path%>userServlet?method=login" method="post">
-  <input type="text" name="username" value="" placeholder="请输入用户名">
+  <input type="text" name="username" value="" placeholder="请输入用户名"><br>
   <input type="text" name="password" value="" placeholder="请输入密码">
-  <button type="submit">Login</button>
+  <button type="submit">Login</button><br>
 </form>
 
     <a href="<%=path%>register.jsp">注册</a>

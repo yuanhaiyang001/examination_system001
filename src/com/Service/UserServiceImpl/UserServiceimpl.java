@@ -9,10 +9,9 @@ public class UserServiceimpl implements UserService {
     //UserDao 对象
     UserDao userDao=new UserDaoimpl();
     @Override
-    public String queryByUserName(String username) {
+    public User queryByUserName(String username) {
         return userDao.queryByUserName(username);
     }
-
     @Override
     public void insert(User user) {
         userDao.insert(user);

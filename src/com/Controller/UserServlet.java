@@ -10,7 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "UserServlet",urlPatterns = "/userServlet")
 public class UserServlet extends BaseServlet {
@@ -20,11 +20,15 @@ public class UserServlet extends BaseServlet {
        //接收请求，调用服务，跳转界面
         String username=request.getParameter("username");
         String userPassword=request.getParameter("password");
-        //调用服务，取出对应用户名的正确密码
-        String password=userService.queryByUserName(username);
+        //调用服务，取出对应用户名的用户id与密码
+        User user=userService.queryByUserName(username);
         //判断密码是否一致
-        if(password.equals(userPassword)){
-            return "WEB-INF/Exam/start.jsp";
+        if(user.getPassword().equals(userPassword)){
+            //使用Session存入user信息
+            HttpSession session=request.getSession();
+            session.setAttribute("User",user);
+            request.setAttribute("userName",username);
+            return "WEB-INF/Exam/studentIndex.jsp";
         }
         //登录失败，仍在原界面
         return "index.jsp";
